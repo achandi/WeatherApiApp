@@ -2,25 +2,10 @@ function cityCall(args) {
   $('#city-box').html("");
   args.RESULTS.forEach((city, i) => {
     $('#city-box').append(
-        '<div class="city_location", data-coordinates="'+city.lat+','+city.lon+'"> City: '+city.name+' </div>'
+        '<div class="city_location", data-coordinates="'+city.lat+','+city.lon+'"> City: '+city.name+'<div class="city_data"></div></div>'
     );
   });
 
-  $('.city_location').click( function() {
-    var city_location = this;
-    var hello = $(this).attr("data-coordinates");
-     $.ajax({
-      method: "GET",
-      url: 'http://api.wunderground.com/api/bb8a68e1f5fecd30/conditions/q/' + hello + '.json',
-      success: function (result) {
-        console.log(city_location);
-        $(city_location).append(
-        '<div> >> weather conditions: '+ result.current_observation.weather + '</div>',
-         '<div> >> temperature: '+ result.current_observation.temperature_string +'</div>'
-        );
-      }
-    });
-  });
 }
 
 $(document).ready(function(){
@@ -36,4 +21,25 @@ $(document).ready(function(){
       });
     }
   });  
+
+
+  $('#city-box').on('click', '.city_location', function() {
+    var city_location = $(this).children('.city_data');
+    var hello = $(this).attr("data-coordinates");
+     $.ajax({
+      method: "GET",
+      url: 'http://api.wunderground.com/api/bb8a68e1f5fecd30/conditions/q/' + hello + '.json',
+      success: function (result) {
+        $(city_location).html(
+        '<div> >> weather conditions: '+ result.current_observation.weather + '</div>'+
+         '<div> >> temperature: '+ result.current_observation.temperature_string +'</div>'
+        );
+      }
+    });
+  });
+
+
+
+
+
 });
