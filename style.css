@@ -1,0 +1,27 @@
+body {
+
+  background-image: url("weather.jpg");
+  background-repeat:no-repeat;
+  background-position: center top;
+
+}
+
+body {
+
+  padding-top: 50px;
+
+}
+
+.starter-template {
+
+  padding: 40px 15px;
+  text-align: center;
+
+}
+
+
+#city-box {
+
+  font-family: Courier; color: red; font-size:15px; 
+
+}
